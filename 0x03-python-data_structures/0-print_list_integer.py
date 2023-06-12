@@ -1,8 +1,10 @@
 #!/usr/bin/python3
+# 0-print_list_integer.py
 
 def print_list_integer(my_list=[]):
-    for i in range(len(my_list)):
-        print("{:d}".format(my_list[i]))
+    """Print all integers of a list."""
+    for num in my_list:
+        print("{:d}".format(num))
 
 # Test the function
 if __name__ == "__main__":
