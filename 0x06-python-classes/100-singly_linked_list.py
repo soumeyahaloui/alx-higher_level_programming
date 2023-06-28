@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 class Node:
     """Represents a node of a singly linked list."""
 
