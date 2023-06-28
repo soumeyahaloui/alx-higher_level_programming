@@ -1,48 +1,70 @@
 #!/usr/bin/python3
-
-"""Define a MagicClass matching exactly a bytecode provided by Holberton."""
-
-
-import math
+"""Define a class Square."""
 
 
+class Square:
+    """Represent a square."""
 
-class MagicClass:
+    def __init__(self, size=0, position=(0, 0)):
+        """Initialize a new square.
 
-    """Represent a circle."""
-
-
-    def __init__(self, radius=0):
-
-        """Initialize a MagicClass.
-
-
-        Arg:
-
-            radius (float or int): The radius of the new MagicClass.
-
+        Args:
+            size (int): The size of the new square.
+            position (int, int): The position of the new square.
         """
+        self.size = size
+        self.position = position
 
-        self.__radius = 0
+    @property
+    def size(self):
+        """Get/set the current size of the square."""
+        return (self.__size)
 
-        if type(radius) is not int and type(radius) is not float:
+    @size.setter
+    def size(self, value):
+        if not isinstance(value, int):
+            raise TypeError("size must be an integer")
+        elif value < 0:
+            raise ValueError("size must be >= 0")
+        self.__size = value
 
-            raise TypeError("radius must be a number")
+    @property
+    def position(self):
+        """Get/set the current position of the square."""
+        return (self.__position)
 
-        self.__radius = radius
-
+    @position.setter
+    def position(self, value):
+        if (not isinstance(value, tuple) or
+                len(value) != 2 or
+                not all(isinstance(num, int) for num in value) or
+                not all(num >= 0 for num in value)):
+            raise TypeError("position must be a tuple of 2 positive integers")
+        self.__position = value
 
     def area(self):
+        """Return the current area of the square."""
+        return (self.__size * self.__size)
 
-        """Return the area of the MagicClass."""
+    def my_print(self):
+        """Print the square with the # character."""
+        if self.__size == 0:
+            print("")
+            return
 
-        return (self.__radius ** 2 * math.pi)
+        [print("") for i in range(0, self.__position[1])]
+        for i in range(0, self.__size):
+            [print(" ", end="") for j in range(0, self.__position[0])]
+            [print("#", end="") for k in range(0, self.__size)]
+            print("")
 
-
-    def circumference(self):
-
-        """Return The circumference of the MagicClass."""
-
-        return (2 * math.pi * self.__radius)
-
-
+    def __str__(self):
+        """Define the print() representation of a Square."""
+        if self.__size != 0:
+            [print("") for i in range(0, self.__position[1])]
+        for i in range(0, self.__size):
+            [print(" ", end="") for j in range(0, self.__position[0])]
+            [print("#", end="") for k in range(0, self.__size)]
+            if i != self.__size - 1:
+                print("")
+        return ("")
