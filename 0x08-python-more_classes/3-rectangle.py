@@ -75,4 +75,20 @@ class Rectangle:
         """
         if self.__width == 0 or self.__height == 0:
             return 0
-        return (self.__width * 2) + (self.__height * 2)
+        return (self.__width + self.__height) * 2
+
+    def __str__(self):
+        """Returns a string representation of the Rectangle.
+
+        The rectangle is represented using '#' characters.
+        If either the width or height is 0, an empty string is returned.
+        """
+        if self.__width == 0 or self.__height == 0:
+            return ""
+
+        rectangle = []
+        for _ in range(self.__height):
+            rectangle.extend(['#'] * self.__width)
+            rectangle.append('\n')
+        rectangle.pop()  # Remove the extra newline at the end
+        return ''.join(rectangle)
