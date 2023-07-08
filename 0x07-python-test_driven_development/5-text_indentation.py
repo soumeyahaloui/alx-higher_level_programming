@@ -1,33 +1,30 @@
 #!/usr/bin/python3
-# 4-print_square.py
-"""
-Module: 5-text_indentation
-
-Description:
-This module defines a function that prints a text with 2 new lines after each of these characters: ., ? and :.
-
-"""
+# 5-text_indentation.py
+"""Defines a text-indentation function."""
 
 
 def text_indentation(text):
-    """
-    Prints the text with 2 new lines after each occurrence of ., ? and : characters.
+    """Print text with two new lines after each '.', '?', and ':'.
 
     Args:
-        text (str): The input text.
-
+        text (string): The text to print.
     Raises:
         TypeError: If text is not a string.
-
     """
     if not isinstance(text, str):
         raise TypeError("text must be a string")
 
-    chars = [".", "?", ":"]
-    result = ""
-    for char in text:
-        result += char
-        if char in chars:
-            result += "\n\n"
+    c = 0
+    while c < len(text) and text[c] == ' ':
+        c += 1
 
-    print("\n".join(line.strip() for line in result.split("\n")))
+    while c < len(text):
+        print(text[c], end="")
+        if text[c] == "\n" or text[c] in ".?:":
+            if text[c] in ".?:":
+                print("\n")
+            c += 1
+            while c < len(text) and text[c] == ' ':
+                c += 1
+            continue
+        c += 1
