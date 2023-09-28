@@ -1,8 +1,8 @@
 #!/bin/bash
-# This script sends a GET request to a URL and displays the body of the response for a 200 status code
+# This script sends a GET request to a URL and displays the body of a 200 status code response
 
-response=$(curl -sI "$1")
+response=$(curl -s -o /dev/null -w "%{http_code}" "$1")
 
-if [[ $response == *"HTTP/1.1 200 OK"* ]]; then
+if [ "$response" -eq 200 ]; then
     curl -s "$1"
 fi
