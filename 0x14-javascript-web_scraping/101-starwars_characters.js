@@ -9,17 +9,22 @@ request(apiUrl, (error, response, body) => {
     console.error(error);
   } else {
     const movieData = JSON.parse(body);
-    const charactersUrls = movieData.characters;
+    const characterUrls = movieData.characters;
 
-    charactersUrls.forEach(characterUrl => {
-      request(characterUrl, (error, response, body) => {
-        if (error) {
-          console.error(error);
-        } else {
-          const characterData = JSON.parse(body);
-          console.log(characterData.name);
-        }
-      });
-    });
+    const printCharacter = (index) => {
+      if (index < characterUrls.length) {
+        request(characterUrls[index], (error, response, characterBody) => {
+          if (error) {
+            console.error(error);
+          } else {
+            const characterData = JSON.parse(characterBody);
+            console.log(characterData.name);
+            printCharacter(index + 1);
+          }
+        });
+      }
+    };
+
+    printCharacter(0);
   }
 });
